@@ -131,8 +131,7 @@ def process_comments():
                 "c_id": c.id,
                 "c_author": c.author.name,
                 "c_body": c.body,
-                "hex": h,
-                "diff": get_difference(r, COLOR_RGB)
+                "hex": h
             })
             ic += 1
         else:
@@ -145,8 +144,7 @@ def process_comments():
                     "c_id": c.id,
                     "c_author": str(c.author),
                     "c_body": c.body,
-                    "hex": h,
-                    "diff": get_difference(r, COLOR_RGB)
+                    "hex": h
                 })
                 ic += 1
             else:
@@ -171,8 +169,10 @@ def process_comments():
     print("New comments with color:", ic)
 
     cs = [c for c in cs if "hex" in c]
+    cs.insert(0, {"c_author": AUTHOR, "hex": COLOR})
+    for c in cs:
+        c["diff"] = get_difference(hex_to_rgb(c["hex"]), COLOR_RGB)
     cs = sorted(cs, key=lambda c: c["diff"])
-    cs.insert(0, {"c_author": AUTHOR, "hex": COLOR, "diff": 0})
 
     print("")
     print("Saving image...")
