@@ -97,7 +97,8 @@ def hex_to_rgb(h):
     h = h.lstrip('#')
     return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
 
-COLOR = "#57ff5a"
+AUTHOR = "XelaaleX1234"
+COLOR = "#41e8e2"
 COLOR_RGB = hex_to_rgb(COLOR)
 
 def process_comments():
@@ -171,17 +172,18 @@ def process_comments():
 
     cs = [c for c in cs if "hex" in c]
     cs = sorted(cs, key=lambda c: c["diff"])
+    cs.insert(0, {"c_author": AUTHOR, "hex": COLOR, "diff": 0})
 
     print("")
     print("Saving image...")
     save_grid(cs, "guesses.png")
     print("Done saving image!")
 
-def generate_color_card(color=COLOR, author="XelaaleX1234", filename="color.png", block_size=1000):
+def generate_color_card(color=COLOR, author=AUTHOR, filename="color.png", block_size=1000):
     save_grid([{"hex": color, "c_author": author}], filename, block_size)
 
 time_started = datetime.now()
 process_comments()
-print("Processing comments:", datetime.now() - time_started)
-# generate_color_card()
+print("Processing comments & saving image:", datetime.now() - time_started)
+generate_color_card()
 # generate_color_card("#5d2573", "SantasChristmasWish", "Kallie.png")
