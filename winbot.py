@@ -177,8 +177,11 @@ def process_comments():
     save_grid(cs, "guesses.png")
     print("Done saving image!")
 
-def generate_color_card():
-    save_grid([{"hex": COLOR, "c_author": "XelaaleX1234"}], "color.png", 1000)
+def generate_color_card(color=COLOR, author="XelaaleX1234", filename="color.png", block_size=1000):
+    save_grid([{"hex": color, "c_author": author}], filename, block_size)
 
+time_started = datetime.now()
 process_comments()
-generate_color_card()
+print("Processing comments:", datetime.now() - time_started)
+# generate_color_card()
+# generate_color_card("#5d2573", "SantasChristmasWish", "Kallie.png")
